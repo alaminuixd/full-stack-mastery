@@ -1,41 +1,75 @@
-/* function generateTwoRandom(max) {
-  const random1 = Math.floor(Math.random() * max);
-  const random2 = Math.floor(Math.random() * max);
-  return { random1, random2 };
-}
-function randomSum(max) {
-  const { random1, random2 } = generateTwoRandom(max);
-  return random1 + random2;
-}
-function randomSub(max) {
-  const { random1, random2 } = generateTwoRandom(max);
-  return random1 - random2;
-}
-function randomSquSum(max) {
-  const { random1, random2 } = generateTwoRandom(max);
-  return random1 * random2 + random1 - random2;
+// Sequence to output: 1, 4, 9, 16, 25
+// function squared() {
+//   let n = 0;
+//   return {
+//     next() {
+//       n++;
+//       if (n <= 5) {
+//         return {
+//           value: n * n,
+//           done: false,
+//         };
+//       }
+//       return {
+//         value: undefined,
+//         done: true,
+//       };
+//     },
+//   };
+// }
+
+// const iterator1 = squared();
+// console.log(iterator1.next());
+
+// function squared2(max) {
+//   return {
+//     [Symbol.iterator]() {
+//       let n = 0;
+//       return {
+//         next() {
+//           n++;
+//           if (n <= max) {
+//             return { value: n * n, done: false };
+//           }
+//           return { value: undefined, done: true };
+//         },
+//       };
+//     },
+//   };
+// }
+// const [a, b, c, d, e] = squared2(5);
+// console.log(a);
+// console.log(b);
+// console.log(c);
+// console.log(d);
+// console.log(e);
+
+class NumberList {
+  constructor(numArray) {
+    if (!Array.isArray(numArray)) {
+      throw Error({ message: 'Item must be an array' });
+    }
+    this.numbers = numArray;
+  }
+  [Symbol.iterator]() {
+    const numbers = this.numbers;
+    let currentIndex = -1;
+    return {
+      next() {
+        return {
+          value: numbers[++currentIndex],
+          done: currentIndex >= numbers.length,
+        };
+      },
+    };
+  }
 }
 
-console.log(randomSum(10));
-console.log(randomSub(10));
-console.log(randomSquSum(10)); */
-
-function generateTwoRandom(max, cb) {
-  const random1 = Math.floor(Math.random() * max);
-  const random2 = Math.floor(Math.random() * max);
-  return cb(random1, random2);
-}
-
-const sum = generateTwoRandom(100, (r1, r2) => {
-  return r1 + r2;
-});
-const sub = generateTwoRandom(100, (r1, r2) => {
-  return r1 - r2;
-});
-const mult = generateTwoRandom(100, (r1, r2) => {
-  return r1 * r2;
-});
-
-console.log(sum);
-console.log(sub);
-console.log(mult);
+const list1 = new NumberList([1, 2, 3, 4, 5]);
+const iterator = list1[Symbol.iterator]();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());

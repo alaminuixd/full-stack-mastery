@@ -14,5 +14,8 @@
     "axios": "^1.13.2",
     "express": "^5.2.1",
     "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.21"
   }
 }
